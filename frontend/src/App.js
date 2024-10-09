@@ -1,9 +1,10 @@
 
-
+import AuthForm from "./Component/Authform";
 function App() {
   return (
     <div className="App">
-      <h1>hii</h1>
+
+      <AuthForm/>
     </div>
   );
 }
