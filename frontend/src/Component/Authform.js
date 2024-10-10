@@ -145,7 +145,7 @@ const AuthForm = () => {
       {/* Registration/Login Form */}
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-md bg-white p-8 shadow-lg rounded-lg space-y-6"
+        className="w-full max-w-md border border-x-black border-y-black bg-white p-8 shadow-2xl rounded-lg space-y-6"
       >
         {!isLogin && (
           <div>
