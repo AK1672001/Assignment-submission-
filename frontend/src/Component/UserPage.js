@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import { CreateContext } from '../App';
+import { useNavigate } from 'react-router-dom';
 function UserPage() {
   const {adminuser,setAdminUser,userId}=useContext(CreateContext)
   const [selectedAdmin, setSelectedAdmin] = useState('');
@@ -25,6 +26,7 @@ function UserPage() {
 
        console.log(response.data)
         console.log(`Task uploaded for admin ID: ${selectedAdmin}`, response.data);
+     
         setTask(''); 
       } catch (error) {
         console.error('Failed to upload task:', error);
