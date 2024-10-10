@@ -18,7 +18,7 @@ function App() {
   const [adminId,setAdminId]=useState('')
   useEffect(()=>{
     const adminall=async()=>{
-         const response=await axios.get("http://localhost:5000/admin")
+         const response=await axios.get("https://assignment-submission-1-8r8o.onrender.com/admin")
          console.log(response.data);
        
          console.log("response>>all admin",response.data.alladmin)
