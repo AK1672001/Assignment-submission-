@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require('path');
 const cors = require("cors");
 const userrouter = require("./Router/userrouter");
 const adminrouter = require("./Router/adminrouter");
@@ -25,3 +26,10 @@ server.use(adminrouter);
 server.listen(process.env.PORT, () => {
   console.log(`Server running on ${process.env.PORT}`);
 });
+
+
+const dirname=path.resolve();
+server.use(express.static(path.join(dirname,'/frontend/build')));
+server.get("*",(req,res)=>{
+    res.sendFile(path.join(dirname,"frontend",'build','index.html'))
+})
