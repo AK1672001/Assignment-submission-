@@ -7,8 +7,8 @@ dotenv.config();
 const register = async (req, res) => {
   const { username, password, email } = req.body;
   try{
-    const data = await User.findOne({ username,email });
-  if (data) return res.status(404).json({ msg: "username ,email already exist" });
+    const data = await User.findOne({email});
+  if (data) return res.status(404).json({ msg: "email already exist" });
   const hashpassword= await bcrypt.hash(password,10)
   const user = new User({ username, password:hashpassword, email, role: "user" });
   await user.save();
@@ -20,17 +20,17 @@ const register = async (req, res) => {
 };
 
 const login=async(req,res)=>{
-    const {username,password}=req.body
-    console.log("req.body",username,password)
+    const {email,password}=req.body
+    console.log("req.body",email,password)
     try{
-          const user= await User.findOne({username})
+          const user= await User.findOne({email})
           console.log("user",user)
-          if(!user) return res.status(404).json({msg:"username not a exist"})
+          if(!user) return res.status(404).json({msg:"email not a exist"})
            const validpassword= await bcrypt.compare(password,user.password);
         console.log("validpassword>>",validpassword);
           if(!validpassword) return res.status(404).json({msg:"please correct this password"});
         
-        const token = jwt.sign({ id: user._id, role: user.role },process.env.SECRET_JWT );
+        const token = jwt.sign({ id: user._id, role: user.role,username:user.name },process.env.SECRET_JWT );
          console.log("token",token)
           return res.status(200).json({msg:"successfully login user ",user,token})
     }
@@ -45,5 +45,15 @@ const assignmentupload= async(req,res)=>{
     await assignment.save();
     res.status(200).json({ message: 'Assignment uploaded',assignment });
 }
-
-module.exports={register,login,assignmentupload}
+const getassignmentadmin= async(req,res)=>{
+    try{
+        const alladmin=await User.find({role:'admin'});
+    
+   return res.status(200).json({ message: 'fetched successfully',alladmin }); 
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+}
+module.exports={register,login,assignmentupload,getassignmentadmin}
