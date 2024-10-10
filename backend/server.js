@@ -11,7 +11,7 @@ server.use(express.json());
 
 server.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ["http://localhost:3000",'https://assignment-submission-1-8r8o.onrender.com'],
     credentials:true
   })
 );

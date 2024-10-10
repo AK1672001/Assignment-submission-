@@ -13,7 +13,7 @@ function Admin() {
       try {
         console.log("adminIdtrhyjkulko>>", adminId);
         const response = await axios.get(
-          `http://localhost:5000/admin/assignment/${adminId}`
+          `https://assignment-submission-1-8r8o.onrender.com/admin/assignment/${adminId}`
         );
         console.log(response.data);
 
@@ -27,7 +27,7 @@ function Admin() {
 
   const handleAccept = async (assignmentId) => {
     try {
-     const response= await axios.post(`http://localhost:5000/admin/assignment/${assignmentId}/accept`);
+     const response= await axios.post(`https://assignment-submission-1-8r8o.onrender.com/admin/assignment/${assignmentId}/accept`);
      console.log(response.data);
      setSuccess(response.data.message);
      setTimeout(()=>{
@@ -43,7 +43,7 @@ function Admin() {
 
   const handleReject = async (assignmentId) => {
     try {
-     const response = await axios.post(`http://localhost:5000/admin/assignment/${assignmentId}/reject`);
+     const response = await axios.post(`https://assignment-submission-1-8r8o.onrender.com/admin/assignment/${assignmentId}/reject`);
      console.log(response.data)
       console.log("Assignment rejected:",response.data);
       setError(response.data.message)

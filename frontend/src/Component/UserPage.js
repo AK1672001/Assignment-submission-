@@ -17,7 +17,7 @@ function UserPage() {
   const handleUploadTask = async() => {
     if (selectedAdmin && task) {
       try {
-        const response = await axios.post('http://localhost:5000/assignmentupload', {
+        const response = await axios.post('https://assignment-submission-1-8r8o.onrender.com/assignmentupload', {
           admin: selectedAdmin,
           task: task,
           userId

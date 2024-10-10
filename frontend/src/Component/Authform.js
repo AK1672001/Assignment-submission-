@@ -30,8 +30,8 @@ const AuthForm = () => {
       try {
         const response = await axios.post(
           role === "user"
-            ? "http://localhost:5000/register"
-            : "http://localhost:5000/admin/register",
+            ? "https://assignment-submission-1-8r8o.onrender.com/register"
+            : "https://assignment-submission-1-8r8o.onrender.com/admin/register",
           { ...formData, role }
         );
         setMessage(response.data.message); 
@@ -53,7 +53,7 @@ const AuthForm = () => {
       // Login user
         try {
           console.log("inside")
-            const response = await axios.post("http://localhost:5000/login", {
+            const response = await axios.post("https://assignment-submission-1-8r8o.onrender.com/login", {
               email: formData.email,
               password: formData.password,
             });

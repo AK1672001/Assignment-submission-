@@ -5,7 +5,9 @@ import axios from "axios";
 import Admin from "./Component/Admin";
 import UserPage from "./Component/UserPage";
 import { useEffect } from "react";
-axios.defaults.baseURL="http://localhost:5000"
+axios.defaults.baseURL=window.location.origin === 'http://localhost:3000' 
+? 'http://localhost:5000' 
+: 'https://assignment-submission-1-8r8o.onrender.com';
 axios.defaults.withCredentials=true
 
 const CreateContext=createContext();
