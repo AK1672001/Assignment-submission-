@@ -6,6 +6,7 @@ function UserPage() {
   const {adminuser,setAdminUser,userId}=useContext(CreateContext)
   const [selectedAdmin, setSelectedAdmin] = useState('');
   const [task,setTask]=useState("");
+  const [success,setSuccess]=useState("")
   
   const handleAdminChange = (e) => {
     setSelectedAdmin(e.target.value);
@@ -26,14 +27,18 @@ function UserPage() {
 
        console.log(response.data)
         console.log(`Task uploaded for admin ID: ${selectedAdmin}`, response.data);
-     
+         setSuccess(response.data.message)
+         setTimeout(()=>{
+            setSuccess("")
+         },2000)
         setTask(''); 
       } catch (error) {
         console.error('Failed to upload task:', error);
+         
       }
     } else {
       console.log('Please select an admin and enter a task.');
-        alert("'Please select an admin and enter a task.")
+         alert("'Please select an admin and enter a task.")
        
     }
   }
@@ -43,7 +48,16 @@ function UserPage() {
       <div className='p-5 mt-20 flex flex-row justify-center'>
         
         <div className='overflow-hidden w-[40rem] border border-x-black border-y-black rounded-xl shadow-2xl p-4'>
+        {
+            success && (
+              <>
+              <h1 className='text-green-400 font-bold text-3xl'>{success}</h1>
+              </>
+            )
+          }
         <div className='flex justify-center'>
+          
+           
           <h1 className='font-bold -mt-2 p-2 text-3xl'>Upload Task</h1>
         </div>
           <div className='flex flex-col mt-2 gap-4'>

@@ -7,6 +7,9 @@ function Admin() {
   const [assignments, setAssignments] = useState([]);
   const [success,setSuccess]=useState("")
   const [error,setError]=useState("")
+  
+  const [assignmentStatus,setAssignmentStatus]=useState({})
+  // const [accept,setAccept]=useState(false);
   console.log("adminId", adminId);
   useEffect(() => {
     const fetchAssignments = async () => {
@@ -30,12 +33,16 @@ function Admin() {
      const response= await axios.post(`https://assignment-submission-1-8r8o.onrender.com/admin/assignment/${assignmentId}/accept`);
      console.log(response.data);
      setSuccess(response.data.message);
+     setAssignmentStatus((prevStatus) => ({
+      ...prevStatus,
+      [assignmentId]: "Accepted"
+    }));
      setTimeout(()=>{
         setSuccess("")
      },2000)
       console.log("Assignment accepted:", response.data);
-      
       setAssignments(assignments);
+      
     } catch (error) {
       console.error("Error accepting assignment:", error);
     }
@@ -47,10 +54,15 @@ function Admin() {
      console.log(response.data)
       console.log("Assignment rejected:",response.data);
       setError(response.data.message)
+      setAssignmentStatus((prevStatus) => ({
+        ...prevStatus,
+        [assignmentId]: "Rejected"
+      }));
       setTimeout(()=>{
          setError("")
       },2000)
       setAssignments(assignments);
+      
     } catch (error) {
       console.error("Error rejecting assignment:", error);
     }
@@ -98,17 +110,19 @@ function Admin() {
                       </p>
                     </div>
                     <div className="flex flex-row gap-2 sm:gap-4">
-                      <button
+                    <button
                         className="bg-green-600 rounded-2xl px-4 py-1 text-white hover:bg-green-700 transition duration-300"
                         onClick={() => handleAccept(assignment._id)}
+                        disabled={assignmentStatus[assignment._id] === "Accepted"}
                       >
-                        Accepted
+                        {assignmentStatus[assignment._id] === "Accepted" ? "Accepted" : "Accept"}
                       </button>
                       <button
                         className="bg-red-700 rounded-2xl px-4 sm:px-4 sm:py-1 py-1 text-white hover:bg-red-800 transition duration-300"
                         onClick={() => handleReject(assignment._id)}
+                        disabled={assignmentStatus[assignment._id] === "Rejected"}
                       >
-                        Rejected
+                        {assignmentStatus[assignment._id] === "Rejected" ? "Rejected" : "Reject"}
                       </button>
                     </div>
                   </div>

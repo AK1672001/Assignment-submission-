@@ -41,9 +41,14 @@ const login=async(req,res)=>{
 
 const assignmentupload= async(req,res)=>{
     const { userId, task, admin } = req.body;
-    const assignment = new Assignment({ userId, task, admin });
+    try{
+      const assignment = new Assignment({ userId, task, admin });
     await assignment.save();
-    res.status(200).json({ message: 'Assignment uploaded',assignment });
+    return res.status(200).json({ message: 'Assignment uploaded',assignment });
+    }
+    catch(err){
+      return res.status(500).json({msg:err.message})
+    }
 }
 const getassignmentadmin= async(req,res)=>{
     try{

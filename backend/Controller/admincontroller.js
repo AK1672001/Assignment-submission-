@@ -55,13 +55,25 @@ const adminassignment = async (req, res) => {
 };
 const adminassignmentaccept = async (req, res) => {
   const { id } = req.params;
-  await Assignment.findByIdAndUpdate(id, { status: "accepted" });
-  res.status(200).json({ message: "Assignment accepted" });
+  try{
+    console.log("id accept",id)
+   const assignment= await Assignment.findByIdAndUpdate(id, { status: "accepted" });
+   console.log("assignment accept",assignment)
+  return res.status(200).json({ message: "Assignment accepted",assignment });
+  }
+  catch(err){
+    return res.status(200).json({msg:err.message});
+  }
 };
 const adminassignmentreject = async (req, res) => {
   const { id } = req.params;
-  await Assignment.findByIdAndUpdate(id, { status: "rejected" });
-  res.status(200).json({ message: "Assignment rejected" });
+  try{
+   const assignment= await Assignment.findByIdAndUpdate(id, { status: "rejected" });
+   return res.status(200).json({ message: "Assignment rejected",assignment });
+  }
+  catch(err){
+    return res.status(200).json({msg:err.message});
+  }
 };
 module.exports = {
   register,
