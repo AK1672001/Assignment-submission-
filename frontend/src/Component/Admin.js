@@ -34,7 +34,7 @@ function Admin() {
         setSuccess("")
      },2000)
       console.log("Assignment accepted:", response.data);
-      // Update the UI after accepting the assignment
+      
       setAssignments(assignments);
     } catch (error) {
       console.error("Error accepting assignment:", error);
@@ -59,8 +59,11 @@ function Admin() {
   return (
     <>
       <div className="p-4 flex grid-cols-1 flex-item mt-6 justify-center">
-        
+         
         <div className="p-4 flex flex-col mt-6 justify-center">
+        <div className=" flex justify-center mt-2">
+          <h1 className="items-center font-bold text-3xl ">Show Task</h1>
+         </div>
         {
           success && (
             <>
@@ -76,7 +79,7 @@ function Admin() {
           )
         }
           {assignments.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
+            <div className="grid grid-cols-1 mt-3 sm:mt-3 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-4">
               {assignments.map((assignment) => (
                 <div
                   key={assignment._id}

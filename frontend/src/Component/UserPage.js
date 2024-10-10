@@ -31,15 +31,21 @@ function UserPage() {
       }
     } else {
       console.log('Please select an admin and enter a task.');
+        alert("'Please select an admin and enter a task.")
+       
     }
   }
 
   return (
     <>
       <div className='p-5 mt-20 flex flex-row justify-center'>
-        <div className='overflow-hidden w-[40rem] rounded-xl shadow-lg p-4'>
-          <div className='flex flex-col gap-4'>
-            {/* Admin selection dropdown */}
+        
+        <div className='overflow-hidden w-[40rem] border border-x-black border-y-black rounded-xl shadow-2xl p-4'>
+        <div className='flex justify-center'>
+          <h1 className='font-bold -mt-2 p-2 text-3xl'>Upload Task</h1>
+        </div>
+          <div className='flex flex-col mt-2 gap-4'>
+            
             <select 
               className='p-2 w-full border border-gray-300 rounded-2xl' 
               value={selectedAdmin} 
